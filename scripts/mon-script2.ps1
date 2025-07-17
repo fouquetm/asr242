@@ -17,7 +17,7 @@ function ExampleFunctionWithDefault {
     Write-Host "Input String: $inputString"
 }
 
-function ExampleFunction 
+function ExampleFunction {
     param (
         [string]$inputBoolean = $true,
         [int]$inputNumber = 10,
@@ -32,7 +32,7 @@ function ExampleFunction
 function ExampleFunctionWithSwitch {
     param (
         [switch]$verbose
-    
+    )
     
     if ($verbose) {
         Write-Host "Verbose mode is ON"
