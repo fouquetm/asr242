@@ -28,3 +28,15 @@ function ExampleFunction {
     Write-Host "Input Number: $inputNumber"
     Write-Host "Input String: $inputString"
 }
+
+function ExampleFunctionWithSwitch {
+    param (
+        [switch]$verbose
+    )
+    
+    if ($verbose) {
+        Write-Host "Verbose mode is ON"
+    } else {
+        Write-Host "Verbose mode is OFF"
+    }
+}
