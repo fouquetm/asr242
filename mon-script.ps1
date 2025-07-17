@@ -19,8 +19,12 @@ function ExampleFunctionWithDefault {
 
 function ExampleFunction {
     param (
-        [string]$inputString
+        [string]$inputBoolean = $true,
+        [int]$inputNumber = 10,
+        [string]$inputString = "Hello, World!"
     )
-    
+
+    Write-Host "Input Boolean: $inputBoolean"
+    Write-Host "Input Number: $inputNumber"
     Write-Host "Input String: $inputString"
 }
