@@ -9,6 +9,14 @@ Write-Host "Param2: $param2"
 # Example usage:
 # .\mon-script.ps1 -param1 "Hello" -param2 42
 
+function ExampleFunctionWithDefault {
+    param (
+        [string]$inputString = "Default Value"
+    )
+    
+    Write-Host "Input String: $inputString"
+}
+
 function ExampleFunction {
     param (
         [string]$inputString
