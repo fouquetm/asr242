@@ -27,12 +27,12 @@ function ExampleFunction {
     Write-Host "Input Boolean: $inputBoolean"
     Write-Host "Input Number: $inputNumber"
     Write-Host "Input String: $inputString"
-}
+
 
 function ExampleFunctionWithSwitch {
     param (
         [switch]$verbose
-    )
+    
     
     if ($verbose) {
         Write-Host "Verbose mode is ON"
