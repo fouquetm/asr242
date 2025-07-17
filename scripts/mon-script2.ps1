@@ -32,7 +32,7 @@ function ExampleFunction {
 function ExampleFunctionWithSwitch {
     param (
         [switch]$verbose
-    )
+    
     
     if ($verbose) {
         Write-Host "Verbose mode is ON"
