@@ -12,15 +12,6 @@ on:
       - 'terraform/**'  # Only run this workflow for changes in the terraform directory
   workflow_dispatch:  # Allows manual triggering of the workflow
 
-env:
-  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  TF_VAR_acr_server: ${{ secrets.TF_VAR_acr_server }}
-  TF_VAR_acr_username: ${{ secrets.TF_VAR_acr_username }}
-  TF_VAR_acr_password: ${{ secrets.TF_VAR_acr_password }}
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -42,19 +33,48 @@ jobs:
         continue-on-error: false
 
       - name: Terraform Init
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         id: init
         run: terraform init
 
       - name: Terraform Validate
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_acr_server: ${{ secrets.TF_VAR_acr_server }}
+          TF_VAR_acr_username: ${{ secrets.TF_VAR_acr_username }}
+          TF_VAR_acr_password: ${{ secrets.TF_VAR_acr_password }}
         id: validate
         run: terraform validate
 
       - name: Terraform Plan
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_acr_server: ${{ secrets.TF_VAR_acr_server }}
+          TF_VAR_acr_username: ${{ secrets.TF_VAR_acr_username }}
+          TF_VAR_acr_password: ${{ secrets.TF_VAR_acr_password }}
         id: plan
         run: terraform plan
         continue-on-error: false
       
       - name: Terraform Apply
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_acr_server: ${{ secrets.TF_VAR_acr_server }}
+          TF_VAR_acr_username: ${{ secrets.TF_VAR_acr_username }}
+          TF_VAR_acr_password: ${{ secrets.TF_VAR_acr_password }}
         id: apply
         run: terraform apply -auto-approve
         continue-on-error: false
