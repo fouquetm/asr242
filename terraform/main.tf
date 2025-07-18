@@ -23,6 +23,21 @@ provider "azurerm" {
   }
 }
 
+variable "acr_server" {   # TF_VAR_acr_server
+  description = "The Azure Container Registry server URL"
+  type        = string
+}
+
+variable "acr_username" { # TF_VAR_acr_username
+  description = "The Azure Container Registry username"
+  type        = string
+}
+
+variable "acr_password" { # TF_VAR_acr_password
+  description = "The Azure Container Registry password"
+  type        = string
+}
+
 data "azurerm_resource_group" "main" {
   name = "rg-asr242-teacher"
 }
@@ -35,9 +50,9 @@ resource "azurerm_container_group" "cg1" {
   dns_name_label      = "ci-asr242-teacher"
   os_type             = "Linux"
   image_registry_credential {
-    server   = "acrasr242teacher.azurecr.io"
-    username = "acrasr242teacher"
-    password = "jfhjfzCrs5vo5j1P5BsxRvVep33OM3+Ogy8pUdlKyu+ACRB284sY"
+    server   = var.acr_server
+    username = var.acr_username
+    password = var.acr_password
   }
 
   container {
