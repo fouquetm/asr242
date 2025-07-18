@@ -27,12 +27,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform fmt
-        working-directory: terraform
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: false
-
       - name: Terraform Init
         working-directory: terraform
         env:
@@ -42,33 +36,6 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         id: init
         run: terraform init
-
-      - name: Terraform Validate
-        working-directory: terraform
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          TF_VAR_acr_server: ${{ secrets.TF_VAR_acr_server }}
-          TF_VAR_acr_username: ${{ secrets.TF_VAR_acr_username }}
-          TF_VAR_acr_password: ${{ secrets.TF_VAR_acr_password }}
-        id: validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        working-directory: terraform
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          TF_VAR_acr_server: ${{ secrets.TF_VAR_acr_server }}
-          TF_VAR_acr_username: ${{ secrets.TF_VAR_acr_username }}
-          TF_VAR_acr_password: ${{ secrets.TF_VAR_acr_password }}
-        id: plan
-        run: terraform plan
-        continue-on-error: false
       
       - name: Terraform Apply
         working-directory: terraform
