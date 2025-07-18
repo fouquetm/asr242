@@ -28,11 +28,13 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
 
       - name: Terraform fmt
+        working-directory: terraform
         id: fmt
         run: terraform fmt -check
         continue-on-error: false
 
       - name: Terraform Init
+        working-directory: terraform
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -42,6 +44,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Validate
+        working-directory: terraform
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -54,6 +57,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
+        working-directory: terraform
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -67,6 +71,7 @@ jobs:
         continue-on-error: false
       
       - name: Terraform Apply
+        working-directory: terraform
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
